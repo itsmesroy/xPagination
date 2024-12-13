@@ -7,7 +7,7 @@ const EmployeeData=()=>{
   const [data, setData]= useState([]);
   const [loading, setLoading]=useState(true);
   const [currentPage, setCurrentPage]=useState(1);
-  const[error, setError]= useState(false);
+  const[error, setError]= useState(null);
 
 const rowPerPage= 10;
 useEffect(()=>{
@@ -19,8 +19,9 @@ useEffect(()=>{
             setData(res);
             setLoading(false);
         }catch(error){
-            setError(true);
+            setError(error.message || "failed to fetch data");
             setLoading(false);        
+            alert(`Error : ${error.message || "failed to fetch data"}`);
         }
     };
     fetchData();
@@ -41,7 +42,8 @@ const handlePrevious=()=>{
         return<div>Loading..</div>
     }
 if(error){
-    return <div>failed to fetch data</div>
+   
+    return <div>failed to fetch data: {error}</div>
 }
 const currentData= data.slice((currentPage-1)*rowPerPage,currentPage*rowPerPage);
   return (
