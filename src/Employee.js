@@ -5,7 +5,7 @@ import {useState, useEffect}  from 'react' ;
 
 const EmployeeData=()=>{
   const [data, setData]= useState([]);
-  const [loading, setLoading]=useEffect(true);
+  const [loading, setLoading]=useState(true);
   const [currentPage, setCurrentPage]=useState(1);
   const[error, setError]= useState(false);
 
@@ -20,12 +20,12 @@ useEffect(()=>{
             setLoading(false);
         }catch(error){
             setError(true);
-            setLoading(false);
-            alert("Fail")
+            setLoading(false);        
         }
     };
     fetchData();
 },[]);
+const totalPages= Math.ceil(data.length/rowPerPage); //pagination logic
 const handlePrevious=()=>{
     if(currentPage>1){
         setCurrentPage(currentPage-1);
@@ -41,15 +41,14 @@ const handlePrevious=()=>{
         return<div>Loading..</div>
     }
 if(error){
-    return <div>Error fetching data</div>
+    return <div>failed to fetch data</div>
 }
-const totalPages= Math.ceil(data.length/rowPerPage); //pagination logic
 const currentData= data.slice((currentPage-1)*rowPerPage,currentPage*rowPerPage);
   return (
     <div className="App">
       <div>
         <table>
-            <thead>
+            <thead >
                 <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -61,10 +60,10 @@ const currentData= data.slice((currentPage-1)*rowPerPage,currentPage*rowPerPage)
                 {
                     currentData.map((employee,index)=>(
                 <tr key={index}>
-                    <th>{employee.id}</th>
-                    <th>{employee.name}</th>
-                    <th>{employee.email}</th>
-                    <th>{employee.role}</th>
+                    <td>{employee.id}</td>
+                    <td>{employee.name}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.role}</td>
                 </tr>
 
                     ))}
@@ -72,7 +71,7 @@ const currentData= data.slice((currentPage-1)*rowPerPage,currentPage*rowPerPage)
         </table>
         <div>
             <button onClick={handlePrevious} disabled={currentPage===1}>Previous</button>
-            <span>Page {currentPage} of {totalPages}</span>
+            <span className="current-page">{currentPage} </span>
             <button onClick={handleNext} disabled={currentPage===totalPages}>Next</button>
         </div>
       </div>

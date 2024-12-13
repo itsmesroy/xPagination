@@ -1,13 +1,13 @@
 
 import React from 'react'
 import './App.css';
-import employeeData from "./Employee"
+import EmployeeData from "./Employee.js"
 
 function App() {  
   return (
     <div className="App">
       <h1>Employee Data Table</h1>
-      <employeeData />
+      <EmployeeData />
     </div>
   );
 }

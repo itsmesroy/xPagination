@@ -28,6 +28,29 @@
   color: #61dafb;
 }
 
+table{
+  width: 100%;
+  margin: 20px auto;
+  text-align: left;
+  border-bottom: 10px solid greenyellow;
+}
+th{
+  background-color: greenyellow;
+  font-weight: bold;
+}
+tr{
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+button{
+  background-color: greenyellow;
+}
+.current-page{
+  display: inline-block;
+  padding: 6px 10px;
+  background-color: greenyellow;
+  margin:10px
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
